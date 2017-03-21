@@ -35,6 +35,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -51,6 +52,9 @@
   <ItemGroup>
     <Compile Include="ModernPasswordField.xaml.cs">
       <DependentUpon>ModernPasswordField.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModernTextField.xaml.cs">
+      <DependentUpon>ModernTextField.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -79,6 +83,10 @@
     <Page Include="ModernPasswordField.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModernTextField.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

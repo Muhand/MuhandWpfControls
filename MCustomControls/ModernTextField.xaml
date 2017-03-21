@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MCustomControls"
              Name="ModernTextBox"
              mc:Ignorable="d" 
-             d:DesignHeight="70" d:DesignWidth="305" Width="305" Height="70">
+             d:DesignHeight="70" d:DesignWidth="305">
     <Grid>
         <Border BorderBrush="{Binding Path=BorderBrush, ElementName=ModernTextBox}" BorderThickness="{Binding Path=BorderThickness, ElementName=ModernTextBox}">
             <Grid>
@@ -27,8 +27,8 @@
                          FontSize="{Binding Path=FontSize, ElementName=ModernTextBox}" 
                          FontFamily="{Binding Path=FontFamily, ElementName=ModernTextBox}" HorizontalAlignment="Stretch" 
                          VerticalContentAlignment="{Binding Path=VerticalContentAlignment, ElementName=ModernTextBox}" BorderThickness="0,0,0,0"
-                         Foreground="{Binding Path=FontColor, ElementName=ModernTextBox}" Text="{Binding Path=PlaceHolder, ElementName=ModernTextBox, Mode=OneWay}"
-                         GotFocus="UIElement_OnGotFocus" LostFocus="UIElement_OnLostFocus"/>
+                         Foreground="{Binding Path=FontColor, ElementName=ModernTextBox}" Text="{Binding PlaceHolder, ElementName=ModernTextBox, Mode=OneWay}"
+                         GotFocus="UIElement_OnGotFocus" LostFocus="UIElement_OnLostFocus" KeyDown="Field_OnKeyDown" TextChanged="Field_OnTextChanged" KeyUp="Field_OnKeyUp"/>
                 
                 <Image Grid.Row="1" Grid.Column="2" Source="{Binding Path=IconSource, ElementName=ModernTextBox}"/>
             </Grid>

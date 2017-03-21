@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace MCustomControls
 {
@@ -22,6 +11,9 @@ namespace MCustomControls
     /// </summary>
     public partial class ModernTextField : UserControl
     {
+        /// <summary>
+        /// Initialize a new object of ModernTextField
+        /// </summary>
         public ModernTextField()
         {
             InitializeComponent();
@@ -49,6 +41,14 @@ namespace MCustomControls
         }
         public static readonly DependencyProperty BorderBrushProperty =
           DependencyProperty.Register("BorderBrush", typeof(SolidColorBrush), typeof(ModernTextField));
+
+        public string Password
+        {
+            get { return (string)GetValue(PasswordProperty); }
+            private set { base.SetValue(PasswordProperty, value); }
+        }
+        public static readonly DependencyProperty PasswordProperty =
+          DependencyProperty.Register("Password", typeof(string), typeof(ModernTextField));
 
         //////////////////////
 
@@ -174,6 +174,19 @@ namespace MCustomControls
         }
         public static readonly DependencyProperty IconSourceProperty =
           DependencyProperty.Register("IconSource", typeof(ImageSource), typeof(ModernTextField));
+
+        /// <summary>
+        /// Is this a password field?
+        /// </summary>
+        public bool IsPassword
+        {
+            get { return (bool) base.GetValue(IsPasswordProperty); }
+            set { base.SetValue(IsPasswordProperty, value); }
+        }
+        public static readonly DependencyProperty IsPasswordProperty =
+          DependencyProperty.Register("IsPassword", typeof(bool), typeof(ModernTextField), new FrameworkPropertyMetadata(false));
+
+
         #endregion
 
         #region Events
@@ -185,6 +198,7 @@ namespace MCustomControls
                 field.Text = "";
                 field.Foreground = FontColor;
             }
+            field.Select(field.Text.Length, 0);
         }
         private void UIElement_OnLostFocus(object sender, RoutedEventArgs e)
         {
@@ -195,9 +209,85 @@ namespace MCustomControls
                 field.Foreground = PlaceHolderColor;
             }
         }
-
+        //private void Field_OnTextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    if (IsPassword && field.Text != PlaceHolder && field.Text != "")
+        //    {
+        //        //var oldchar = field.Text[field.Text.Length - 1];
+        //        var oldchar = field.Text[field.CaretIndex-1];
+        //        Password += oldchar;
+        //        field.Text = field.Text.Replace(oldchar, '*');
+        //        field.Select(field.Text.Length, 0);
+        //    }
+        //}
         #endregion
 
+        private void Field_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            //if (e.Key != Key.Back || e.Key != Key.Enter)
+            //{
+            //    field.Text = field.Text.Replace(field.Text[field.CaretIndex], '*');
+            //    Debug.WriteLine(field.CaretIndex);
+            //}
+            //char[] text = field.Text.ToCharArray();
+            //int pos = field.SelectionStart;
 
+            //switch (e.Key)
+            //{
+            //    case Key.Back:
+            //        if (pos == 0)
+            //            return;
+            //        pos--;
+            //        break;
+            //    case Key.Delete:
+            //        if (pos == text.Length)
+            //            return;
+            //        break;
+            //    default:
+            //        return;
+            //}
+
+            //switch (text[pos])
+            //{
+            //    case '?':
+            //        text[pos] = '*';
+            //        break;
+            //    case '*':
+            //        text[pos] = '?';
+            //        break;
+            //    default:
+            //        return;
+            //}
+            //field.Text = new String(text);
+            //e.Handled = true;
+        }
+
+        private void Field_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            //var tb = (TextBox)sender;
+            //using (tb.DeclareChangeBlock())
+            //{
+            //    foreach (var c in e.Changes)
+            //    {
+            //        if (c.AddedLength == 0) continue;
+            //        tb.Select(c.Offset, c.AddedLength);
+            //        if (tb.SelectedText.Contains(' '))
+            //        {
+            //            tb.SelectedText = tb.SelectedText.Replace(' ', '_');
+            //        }
+            //        tb.Select(c.Offset + c.AddedLength, 0);
+            //    }
+            //}
+        }
+
+        private void Field_OnKeyUp(object sender, KeyEventArgs e)
+        {
+            //if ((e.Key != Key.Back) && (e.Key != Key.Enter) && field.Text.Length > 0 && IsPassword == true)
+            //{
+            //    field.Text = field.Text.Replace(field.Text[field.CaretIndex-1], '*');
+            //    Debug.WriteLine(field.CaretIndex);
+            //    field.Select(field.Text.Length, 0);
+            //}
+        }
     }
 }
